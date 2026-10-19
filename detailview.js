@@ -25,7 +25,7 @@ function showDetails(detail) {
  <h1>${detail.name}</h1>
 
             <div class="intro">
-                <img src="https://cdn.dummyjson.com/recipe-images/${detail.selectedId}.webp" alt="opskriftbilled">
+                <img src="${detail.image}" alt="opskriftbilled">
                 <div class="intro_række">
                     <p>Antal personer: ${detail.servings}</p>
                     <p>Forberedelsestid: ${detail.prepTimeMinutes} minutter</p>
