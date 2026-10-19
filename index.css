@@ -92,7 +92,6 @@ h1,
 /* Dagens favoritter */
 .favoritter {
   padding: 52px 22px 30px;
-  border-bottom: 3px solid #111;
 }
 
 .favoritter h2 {
@@ -101,9 +100,15 @@ h1,
   margin: 8px 0 55px;
 }
 
+.flerefavoritter {
+  border-bottom: 3px solid #111;
+  padding-bottom: 1rem;
+}
+
 .favoritter > div {
   /*kun direkte børn af favoritter */
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
@@ -280,6 +285,13 @@ DESKTOP version
     padding: 12px;
     border-radius: 7px;
     font-size: 15px;
+  }
+
+  .favoritter > div {
+    /*kun direkte børn af favoritter */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
 
   /* NYHEDSBREV - DESKTOP */
