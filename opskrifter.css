@@ -1,0 +1,137 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  interpolate-size: allow-keywords;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  line-height: 1.25;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+img,
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+label {
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  font-size: max(1em, 16px);
+}
+
+textarea {
+  resize: none;
+  min-height: 4lh;
+}
+
+legend {
+  padding: 0;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+/****** Style *****/
+:root {
+  --baggrund-bokse: #ffffff;
+}
+
+body {
+  background-color: #f3e2c7;
+}
+
+h1 {
+  font-family: "Permanent Marker", cursive;
+  color: #cf623b;
+  padding: 5rem;
+  text-align: center;
+  font-size: 7rem;
+  padding-inline: 2rem;
+}
+h2 {
+  font-family: "Permanent Marker", cursive;
+  color: black;
+  font-size: 1.5rem;
+}
+/* Billede og hurtig infor */
+.intro {
+  background-color: var(--baggrund-bokse);
+  margin-bottom: 4rem;
+}
+.intro_række {
+  display: flex;
+  gap: 15px; /* Afstand mellem de forskellige informationer */
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+/* Beskrivelse af retten */
+.Beskrivelse {
+  background-color: var(--baggrund-bokse);
+}
+/* Ingradienser og fremgangsmåde */
+.ingredienser,
+.fremgangsmaade {
+  padding: 2rem;
+  background-color: var(--baggrund-bokse);
+  margin-bottom: 4rem; /* Afstand mellem de to sektioner */
+  margin-top: 4rem; /* Afstand mellem de to sektioner */
+  margin-inline: 2rem;
+}
+
+.ingredienser_tekst,
+.fremgangsmaade_tekst {
+  border: solid 2px black; /* Den sorte ramme */
+  padding: 2rem;
+  background-color: var(--baggrund-bokse);
+}
+/* Desktop version */
+@media (min-width: 768px) {
+  .grid_1-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .intro img {
+    width: 30%;
+    margin-inline: auto;
+  }
+  .intro {
+    padding-block: 3rem;
+    margin-inline: 2rem;
+  }
+  .intro p {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+  .Beskrivelse {
+    margin-inline: 2rem;
+  }
+}
