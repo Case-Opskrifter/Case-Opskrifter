@@ -17,10 +17,14 @@ h1 {
 .intro {
   background-color: var(--baggrund-bokse);
   margin-bottom: 4rem;
-  width: 80%;
+  width: 100%;
   margin-inline: auto;
   padding: 2rem;
 }
+.intro img {
+  border: 1px solid black;
+}
+
 .intro_række {
   display: flex;
   gap: 15px; /* Afstand mellem de forskellige informationer */
@@ -46,12 +50,13 @@ h1 {
 .fremgangsmaade_tekst {
   border: solid 2px black; /* Den sorte ramme */
   padding: 2rem;
-  line-height: 2rem;
+  line-height: 2.5rem;
   background-color: var(--baggrund-bokse);
 }
 /* Checkbox-liste til ingredienser */
 .ingrediensliste {
   list-style: none;
+  gap: 10px;
 }
 
 .ingrediensliste li {
@@ -60,6 +65,7 @@ h1 {
 }
 .grid_1-2 h2 {
   margin-bottom: 1rem;
+  font-family: "Permanent Marker", cursive;
 }
 /* Desktop version */
 @media (min-width: 768px) {
@@ -67,18 +73,23 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    margin-inline: 16rem;
+    margin-bottom: 3rem;
+    font-size: 1.3rem;
   }
 
   .intro img {
-    width: 30%;
     margin-inline: auto;
+    width: 60%;
   }
   .intro {
     padding-block: 3rem;
+    width: 66%;
   }
   .intro p {
     display: grid;
     grid-template-rows: 1fr;
+    font-size: 1.3rem;
   }
   .Beskrivelse {
     margin-inline: 2rem;

@@ -130,12 +130,31 @@ h1,
   cursor: pointer;
 }
 
-.card button img {
-  width: 30px;
-  height: 30px;
+/* kopieret styling af favorit knap ind fra liste.css*/
+.favorite-btn {
+  position: absolute;
+  top: clamp(7px, 1vw, 13px);
+  right: clamp(7px, 1vw, 13px);
+  width: clamp(42px, 5.5vw, 76px);
+  height: clamp(42px, 5.5vw, 76px);
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.88);
+  color: #e52626;
+  font-size: clamp(26px, 3.8vw, 46px);
+  line-height: 1;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
 }
 
-/* se flere favoritter */
+.favorite-btn:hover {
+  transform: scale(1.04);
+}
+
+.favorite-btn.active {
+  color: #e52626;
+}
+
+/* se flere favoritter link */
 .flerefavoritter {
   display: block;
   text-align: right;

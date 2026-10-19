@@ -28,7 +28,7 @@ function showDetails(detail) {
                 <img src="${detail.image}" alt="opskriftbilled">
                 <div class="intro_række">
                     <p>Antal personer: ${detail.servings}</p>
-                    <p>Forberedelsestid: ${detail.prepTimeMinutes} minutter</p>
+                    <p>Forberedelsestid: ${detail.prepTimeMinutes} min</p>
                     <p>Tilberedningstid: ${detail.cookTimeMinutes} min</p>
                 </div>
             </div>
