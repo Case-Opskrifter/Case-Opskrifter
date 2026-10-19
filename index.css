@@ -1,0 +1,310 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* fonte */
+
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100rem;
+  font-style: normal;
+}
+
+/* generelle styles */
+body {
+  margin: 0;
+  color: #000000;
+  font-family: "Inter", sans-serif;
+  background-color: antiquewhite;
+}
+
+h1,
+.favoritter h2,
+.nyhedsbrev h2 {
+  font-family: "Permanent Marker", cursive;
+  color: #cf623b;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* Header */
+
+/* hero sektion */
+.hero {
+  padding: 38px 25px 50px;
+  border-bottom: 3px solid #111;
+}
+
+.hero h1 {
+  font-size: clamp(32px, 7vw, 54px);
+  line-height: 1.3;
+  margin: 0 22px 36px;
+}
+
+.hero h2 {
+  font-size: clamp(16px, 4vw, 28px);
+  line-height: 1.5;
+  font-weight: 400;
+  font-style: italic;
+  margin: 0 22px 40px;
+}
+
+.hero div {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.hero div a {
+  flex: 1; /* Gør knapperne lige brede */
+  min-width: 0; /* Nulstil bredden for at undgå at påvirke flexbox-layoutet */
+  min-height: 54px; /* Sæt en minimumshøjde for knapperne */
+  padding: 12px 5px;
+  display: flex; /* Bruger flexbox til at centrere indholdet */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background-color: #cf623b;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 4px 5px #0003;
+}
+
+/* Dagens favoritter */
+.favoritter {
+  padding: 52px 22px 30px;
+  border-bottom: 3px solid #111;
+}
+
+.favoritter h2 {
+  font-size: clamp(36px, 6vw, 55px);
+  text-align: center;
+  margin: 8px 0 55px;
+}
+
+.favoritter > div {
+  /*kun direkte børn af favoritter */
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  background-color: white;
+}
+
+.card > a {
+  /* kun direkte børn af card */
+  color: #111;
+  text-decoration: none;
+}
+
+.card > a > img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Sørger for, at billedet altid er kvadratisk */
+  object-fit: cover;
+}
+
+.card h3 {
+  font-size: clamp(12px, 1.2vw, 18px);
+  margin: 7px 0 2px;
+}
+
+.card_info {
+  font-size: clamp(9px, 0.8vw, 13px);
+  color: #777;
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+.card_review {
+  color: #111;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 22px;
+}
+
+/* Skjul de ekstra kort på mobil */
+.desktop-card {
+  display: none;
+}
+
+/* favorit hjerte (mangler ikon webp) */
+.card button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 0;
+  /* background: transparent; */
+  border: none;
+  cursor: pointer;
+}
+
+.card button img {
+  width: 30px;
+  height: 30px;
+}
+
+/* se flere favoritter */
+.flerefavoritter {
+  display: block;
+  text-align: right;
+  margin-top: 25px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Nyhedsbrev */
+.nyhedsbrev {
+  display: flex;
+  padding: 36px 20px 70px;
+}
+
+.nyhedsbrevsektion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+  background-color: white;
+  padding: 26px 22px;
+}
+
+.nyhedsbrev-tekst {
+  min-width: 0;
+}
+
+.nyhedsbrev h2 {
+  font-family: "Permanent Marker", cursive;
+  color: #cf623b;
+  font-size: clamp(18px, 5vw, 26px);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.nyhedsbrev p {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.nyhedsbrev button {
+  background-color: #cf623b;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 3px 5px #0003;
+  cursor: pointer;
+}
+
+.nyhedsbrev-billede {
+  min-width: 0;
+}
+
+.nyhedsbrev-billede img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #111;
+}
+
+/* ==========================
+DESKTOP version
+========================== */
+
+@media (min-width: 768px) {
+  /*sætter de to cards ekstra på*/
+  .desktop-card {
+    display: block;
+  }
+
+  /* HERO sektion desktop */
+
+  .hero {
+    padding: 40px 6% 35px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    font-size: clamp(48px, 7.5vw, 90px);
+    line-height: 1.35;
+  }
+
+  .hero h2 {
+    max-width: 1100px;
+    margin: 0 auto 55px;
+    font-size: clamp(20px, 2.5vw, 27px);
+    line-height: 1.5;
+  }
+
+  .hero div {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero div a {
+    flex: 0 1 145px; /* Gør knapperne lige brede */
+    min-height: 46px;
+    padding: 12px;
+    border-radius: 7px;
+    font-size: 15px;
+  }
+
+  /* NYHEDSBREV - DESKTOP */
+
+  .nyhedsbrevsektion {
+    gap: 35px;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .nyhedsbrev h2 {
+    font-size: clamp(32px, 3.5vw, 60px);
+    margin-bottom: 50px;
+  }
+
+  .nyhedsbrev p {
+    font-size: clamp(17px, 1.6vw, 22px);
+    line-height: 1.5;
+    margin-bottom: 25px;
+  }
+
+  .nyhedsbrev button {
+    font-size: 18px;
+    padding: 11px 24px;
+    border-radius: 7px;
+    margin-top: 5px;
+  }
+}
