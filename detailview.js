@@ -36,9 +36,15 @@ function showDetails(detail) {
                 <div class="ingredienser">
                     <div class="ingredienser_tekst">
                 <h2>Ingredienser:</h2>
-                <ul>
-                    ${detail.ingredients.map((ing) => `<li>${ing}</li>`).join("")}
-                </ul>
+                <ul class="ingrediensliste">${detail.ingredients
+                  .map(
+                    (ing, index) => ` 
+                <li>
+                <label for="ingrediens-${index}"><input type="checkbox" id="ingrediens-${index}"><span>${ing}</span></label>
+                </li> `,
+                  )
+                  .join("")}
+</ul>
             </div>
                 </div>
                 <div class="fremgangsmaade">

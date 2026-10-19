@@ -6,22 +6,20 @@
 } */
 
 h1 {
-  font-family: "Permanent Marker", cursive;
-  color: #cf623b;
   padding: 5rem;
   text-align: center;
   font-size: 7rem;
   padding-inline: 2rem;
+  font-size: clamp(48px, 7vw, 54px);
 }
-h2 {
-  font-family: "Permanent Marker", cursive;
-  color: black;
-  font-size: 1.5rem;
-}
+
 /* Billede og hurtig infor */
 .intro {
   background-color: var(--baggrund-bokse);
   margin-bottom: 4rem;
+  width: 80%;
+  margin-inline: auto;
+  padding: 2rem;
 }
 .intro_række {
   display: flex;
@@ -48,7 +46,20 @@ h2 {
 .fremgangsmaade_tekst {
   border: solid 2px black; /* Den sorte ramme */
   padding: 2rem;
+  line-height: 2rem;
   background-color: var(--baggrund-bokse);
+}
+/* Checkbox-liste til ingredienser */
+.ingrediensliste {
+  list-style: none;
+}
+
+.ingrediensliste li {
+  margin-bottom: 0.7rem;
+  padding-right: 2rem;
+}
+.grid_1-2 h2 {
+  margin-bottom: 1rem;
 }
 /* Desktop version */
 @media (min-width: 768px) {
@@ -64,7 +75,6 @@ h2 {
   }
   .intro {
     padding-block: 3rem;
-    margin-inline: 2rem;
   }
   .intro p {
     display: grid;

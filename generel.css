@@ -64,3 +64,32 @@ body {
   background-color: #ffffff;
   background-image: url(img/baggrundlys.webp);
 }
+/* fonte */
+
+.permanent-marker-regular {
+  font-family: "Permanent Marker", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.inter-font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100rem;
+  font-style: normal;
+}
+
+/* generelle styles */
+body {
+  margin: 0;
+  color: #000000;
+  font-family: "Inter", sans-serif;
+}
+
+h1,
+.logo {
+  font-family: "Permanent Marker", cursive;
+  color: #cf623b;
+  font-weight: 400;
+  text-transform: uppercase;
+}

@@ -1,26 +1,7 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: Georgia, "Times New Roman", serif;
-  color: #151515;
-
-  background-color: #f8e2c4;
-  background-image: linear-gradient(rgba(191, 101, 66, 0.2) 2px, transparent 2px), linear-gradient(90deg, rgba(191, 101, 66, 0.2) 2px, transparent 2px), linear-gradient(rgba(191, 101, 66, 0.09) 1px, transparent 1px), linear-gradient(90deg, rgba(191, 101, 66, 0.09) 1px, transparent 1px);
-  background-size:
-    70px 70px,
-    70px 70px,
-    10px 10px,
-    10px 10px;
-}
-
 button,
 input,
 select {
-  font: inherit;
+  font: "Inter", sans-serif;
 }
 
 button {
@@ -38,13 +19,11 @@ button {
 }
 
 .logo {
-  margin: 0;
-  font-family: "Brush Script MT", "Segoe Script", cursive;
+  margin: 0 0 5rem;
   font-size: clamp(58px, 8vw, 100px);
-  line-height: 0.9;
-  color: #c76a45;
+  line-height: 1.2;
   letter-spacing: 2px;
-  text-transform: uppercase;
+  text-align: center;
 }
 
 .filter-menu-btn {
@@ -96,7 +75,7 @@ button {
   align-items: center;
   gap: 12px;
   min-height: 70px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: clamp(18px, 2vw, 26px);
   font-weight: 800;
 }
@@ -136,7 +115,7 @@ button {
 
 .filter-info {
   margin: 8px 0 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #6b6b6b;
   font-size: clamp(13px, 1.4vw, 16px);
 }
@@ -217,7 +196,7 @@ button {
   gap: clamp(5px, 0.9vw, 14px);
   margin: 0;
   max-width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #747474;
   font-size: clamp(11px, 1.5vw, 22px);
   line-height: 1.2;
@@ -228,7 +207,7 @@ button {
 .recipe-ingredients {
   max-width: 100%;
   margin: clamp(8px, 1.3vw, 18px) 0 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #5f5f5f;
   font-size: clamp(10px, 1.1vw, 15px);
   line-height: 1.4;
@@ -254,7 +233,7 @@ button {
   border-radius: clamp(9px, 1.2vw, 14px);
   background-color: #c86b46;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: clamp(11px, 1.6vw, 24px);
   line-height: 1.1;
   font-weight: 800;
@@ -341,7 +320,7 @@ button {
     color: #a65439;
     font-size: 24px;
     font-weight: 800;
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Inter", sans-serif;
     cursor: pointer;
   }
 
