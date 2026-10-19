@@ -1,70 +1,9 @@
-*,
-::before,
-::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
+/* html {
   interpolate-size: allow-keywords;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-}
-
-h1,
-h2 {
-  line-height: 1.25;
-}
-
-p,
-li {
-  text-wrap: pretty;
-}
-
-img,
-svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-label {
-  display: block;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
-  color: inherit;
-  font-size: max(1em, 16px);
-}
-
-textarea {
-  resize: none;
-  min-height: 4lh;
-}
-
-legend {
-  padding: 0;
-}
-
-select,
-::picker(select) {
-  appearance: base-select;
-}
-
-/****** Style *****/
-:root {
-  --baggrund-bokse: #ffffff;
-}
-
-body {
-  background-color: #f3e2c7;
-}
+} */
 
 h1 {
   font-family: "Permanent Marker", cursive;

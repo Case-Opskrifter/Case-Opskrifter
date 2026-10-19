@@ -1,0 +1,66 @@
+/* reset */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+h1,
+h2 {
+  line-height: 1.25;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+label {
+  display: block;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  font-size: max(1em, 16px);
+}
+
+textarea {
+  resize: none;
+  min-height: 4lh;
+}
+
+legend {
+  padding: 0;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+/****** Style *****/
+:root {
+  --baggrund-bokse: #ffffff;
+}
+
+/* generelle variabler */
+body {
+  background-repeat: repeat-y;
+  background-position: top center;
+  background-size: auto;
+  background-color: #ffffff;
+  background-image: url(img/baggrundlys.webp);
+}
