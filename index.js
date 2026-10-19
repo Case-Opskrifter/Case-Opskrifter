@@ -30,13 +30,8 @@ function showProducts(products) {
 
     /* indsætter produktet i containeren og tilføjede soldoutclassen */
     listContainer.innerHTML += `<article class="card">
-<<<<<<< HEAD
-                <a href="detailview.html"> <img src="https://cdn.dummyjson.com/recipe-images/${image}.webp" alt="navn på opskrift">
-                <h3>${card.name}</h3>
-=======
                 <a href="opskrifter.html"> <img src="${product.image}" alt="navn på opskrift">
                 <h3>${product.name}</h3>
->>>>>>> justeringer
                 </a>
                 <p class="card_info"> ${product.cuisine} &middot; ${product.difficulty} &middot; ${product.cookTimeMinutes}</p>
                 <p class="card_review">★ ${product.rating}</p>
