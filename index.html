@@ -7,25 +7,56 @@
     <link rel="stylesheet" href="index.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="generel.css">
+    <link rel="stylesheet" href="header+footer.css">
+
     <script src="index.js" defer></script>
     <title>Forside</title>
 </head>
 
 <body>
-    <header>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link" aria-label="Gå til forsiden">
+                <img src="img/logosort.webp" alt="Logo" class="logo">
+            </a>
 
+            <nav class="main-nav" aria-label="Hovednavigation">
+                <a href="#" class="nav-link">Opskrifter</a>
+
+                <a href="#" class="icon-link" aria-label="Favoritter">
+                    <img src="img/hjerte.webp" alt="" class="nav-icon">
+                </a>
+
+                <a href="#" class="icon-link" aria-label="Søg">
+                    <img src="img/søg.png" alt="" class="nav-icon">
+                </a>
+
+                <a href="#" class="icon-link" aria-label="Kurv">
+                    <img src="img/kurv.png" alt="" class="nav-icon">
+                </a>
+
+                <a href="#" class="icon-link" aria-label="Login">
+                    <img src="img/login.png" alt="" class="nav-icon">
+                </a>
+            </nav>
+
+            <button class="burger-menu" aria-label="Åbn menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </header>
 
     <main>
+
         <!-- Hero sektion  -->
         <section class="hero">
             <h1>Mindre madstress. Mere madglæde.</h1>
@@ -44,61 +75,53 @@
             <h2>Dagens Favoritter</h2>
             <div class="favoritter-container favoritter">
                 <article class="card">
-                    <a href="detailview.html"> <img src="img/placeholder.png"
-                            alt="navn på opskrift">
+                    <a href="detailview.html"> <img src="img/placeholder.png" alt="navn på opskrift">
                         <h3>Navn på Opskriften</h3>
                     </a>
                     <p class="card_info">køkken &middot; sværhedsgrad &middot;
                         tid
                     </p>
                     <p class="card_review">★ anmeldelse</p>
-                    <button type="button"
-                        aria-label="Gem spaghetti som favorit">
+                    <button type="button" aria-label="Gem spaghetti som favorit">
                         <img src="img/hjerte.webp" alt="hjertesymbol">
                     </button>
                 </article>
 
                 <article class="card">
-                    <a href="detailview.html"> <img src="img/placeholder.png"
-                            alt="navn på opskrift">
+                    <a href="detailview.html"> <img src="img/placeholder.png" alt="navn på opskrift">
                         <h3>Navn på Opskriften</h3>
                     </a>
                     <p class="card_info">køkken &middot; sværhedsgrad &middot;
                         tid
                     </p>
                     <p class="card_review">★ anmeldelse</p>
-                    <button type="button"
-                        aria-label="Gem spaghetti som favorit">
+                    <button type="button" aria-label="Gem spaghetti som favorit">
                         <img src="img/hjerte.webp" alt="hjertesymbol">
                     </button>
                 </article>
 
                 <article class="card desktop-card">
-                    <a href="detailview.html"> <img src="img/placeholder.png"
-                            alt="navn på opskrift">
+                    <a href="detailview.html"> <img src="img/placeholder.png" alt="navn på opskrift">
                         <h3>Navn på Opskriften</h3>
                     </a>
                     <p class="card_info">køkken &middot; sværhedsgrad &middot;
                         tid
                     </p>
                     <p class="card_review">★ anmeldelse</p>
-                    <button type="button"
-                        aria-label="Gem spaghetti som favorit">
+                    <button type="button" aria-label="Gem spaghetti som favorit">
                         <img src="img/hjerte.webp" alt="hjertesymbol">
                     </button>
                 </article>
 
                 <article class="card desktop-card">
-                    <a href="detailview.html"> <img src="img/placeholder.png"
-                            alt="navn på opskrift">
+                    <a href="detailview.html"> <img src="img/placeholder.png" alt="navn på opskrift">
                         <h3>Navn på Opskriften</h3>
                     </a>
                     <p class="card_info">køkken &middot; sværhedsgrad &middot;
                         tid
                     </p>
                     <p class="card_review">★ anmeldelse</p>
-                    <button type="button"
-                        aria-label="Gem spaghetti som favorit">
+                    <button type="button" aria-label="Gem spaghetti som favorit">
                         <img src="img/hjerte.webp" alt="hjertesymbol">
                     </button>
                 </article>
@@ -119,8 +142,7 @@
                     <button type="#">Tilmeld dig her</button>
                 </div>
                 <div class="nyhedsbrev-billede">
-                    <img src="img/nyhedsbrev-figur.webp"
-                        alt="illustration af Karstenkok">
+                    <img src="img/nyhedsbrev-figur.webp" alt="illustration af Karstenkok">
                 </div>
             </div>
         </section>

@@ -5,67 +5,103 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opskrifter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="generel.css" />
+    <link rel="stylesheet" href="header+footer.css" />
     <link rel="stylesheet" href="liste.css" />
-    <link rel="stylesheet" href="generel.css">
-    <script src="liste.js" defer></script>
 
+    <script src="liste.js" defer></script>
 </head>
 
 <body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link" aria-label="Gå til forsiden">
+                <img src="img/logosort.webp" alt="Logo" class="logo">
+            </a>
+
+            <nav class="main-nav" aria-label="Hovednavigation">
+                <a href="#" class="nav-link">Opskrifter</a>
+
+                <a href="#" class="icon-link" aria-label="Favoritter">
+                    <img src="img/hjerte.webp" alt="" class="nav-icon">
+                </a>
+
+                <a href="#" class="icon-link" aria-label="Søg">
+                    <img src="img/søg.png" alt="" class="nav-icon">
+                </a>
+
+                <a href="#" class="icon-link" aria-label="Kurv">
+                    <img src="img/kurv.png" alt="" class="nav-icon">
+                </a>
+
+                <a href="#" class="icon-link" aria-label="Login">
+                    <img src="img/login.png" alt="" class="nav-icon">
+                </a>
+            </nav>
+
+            <button class="burger-menu" type="button" aria-label="Åbn menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
     <main class="page">
-        <header class="site-header">
-            <h1 class="logo">Opskrifter</h1>
-        </header>
 
-        <button id="filterMenuBtn" class="filter-menu-btn" type="button">
-            ☰ Filtre
-        </button>
+        <h1 class="h1_tekst_liste">Opskrifter</h1>
 
-        <section id="filterSection" class="filter-section">
-            <div class="filter-row top-row">
-                <input type="text" id="searchInput"
-                    class="filter-field wide-field"
-                    placeholder="Søg på opskrift..." autocomplete="off" />
 
-                <input type="text" id="includeIngredientsInput"
-                    class="filter-field wide-field"
-                    placeholder="Ingredienser du har..." autocomplete="off" />
 
-                <input type="text" id="excludeIngredientsInput"
-                    class="filter-field wide-field"
-                    placeholder="Ingredienser du vil undgå..."
-                    autocomplete="off" />
-            </div>
+        <section id="filterSection" class="filter-section" aria-label="Filtrering af opskrifter">
 
-            <div class="filter-row middle-row">
-                <select id="timeFilter" class="filter-field small-field">
-                    <option value="all">Tid: alle</option>
+            <button id="resetFilters" class="reset-btn" type="button">
+                Nulstil filtre
+            </button>
+
+            <div class="filter-grid">
+
+                <input type="text" id="searchInput" class="filter-field" placeholder="Søg på opskrifter"
+                    autocomplete="off">
+
+                <input type="text" id="includeIngredientsInput" class="filter-field" placeholder="Ingredienser du har"
+                    autocomplete="off">
+
+                <input type="text" id="excludeIngredientsInput" class="filter-field" placeholder="Undgå ingredienser"
+                    autocomplete="off">
+
+                <select id="timeFilter" class="filter-field">
+                    <option value="all">Tid: Alle</option>
                     <option value="30">Under 30 min</option>
                     <option value="45">Under 45 min</option>
                     <option value="60">Under 60 min</option>
                     <option value="90">Under 90 min</option>
                 </select>
-            </div>
 
-            <div class="filter-row bottom-row">
-                <select id="sortFilter" class="filter-field sort-field">
-                    <option value="default">Sortér...</option>
+                <select id="sortFilter" class="filter-field">
+                    <option value="default">Sortér</option>
                     <option value="time-asc">Kortest tid først</option>
                     <option value="time-desc">Længst tid først</option>
                     <option value="name-asc">Navn A-Å</option>
                     <option value="name-desc">Navn Å-A</option>
                 </select>
 
+                <input type="checkbox" id="favoritesOnly" class="favorite-checkbox">
+
                 <label class="favorite-toggle" for="favoritesOnly">
-                    <input type="checkbox" id="favoritesOnly" />
-                    <span>Kun favoritter</span>
+                    Favoritter
                 </label>
 
-                <button id="resetFilters" class="reset-btn" type="button">
-                    Nulstil filtre
-                </button>
             </div>
+
         </section>
 
         <section class="status-section">
@@ -77,7 +113,30 @@
         </section>
 
         <section id="recipesContainer" class="recipes-grid"></section>
+
     </main>
+
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+
+            <nav class="footer-nav" aria-label="Footer navigation">
+                <a href="kontakt.html">Kontakt</a>
+                <a href="omos.html">Om os</a>
+            </nav>
+
+            <div class="footer-socials" aria-label="Sociale medier">
+                <a href="#" aria-label="Facebook">
+                    <img src="img/facebook-removebg-preview.png" alt="">
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    <img src="img/Insta-removebg-preview.png" alt="">
+                </a>
+            </div>
+
+        </div>
+    </footer>
 </body>
 
 </html>

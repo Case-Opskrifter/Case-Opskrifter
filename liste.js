@@ -203,6 +203,11 @@ function renderRecipes(recipes) {
     const recipeCard = document.createElement("article");
     recipeCard.classList.add("recipe-card");
 
+    recipeCard.dataset.id = recipe.id;
+    recipeCard.tabIndex = 0;
+    recipeCard.setAttribute("role", "link");
+    recipeCard.setAttribute("aria-label", `Se opskrift: ${recipe.name}`);
+
     recipeCard.innerHTML = `
       <div class="image-wrapper">
         <img
@@ -244,10 +249,26 @@ function renderRecipes(recipes) {
       </div>
     `;
 
+    recipeCard.addEventListener("click", () => {
+      goToDetailView(recipe.id);
+    });
+
+    recipeCard.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        goToDetailView(recipe.id);
+      }
+    });
+
     recipesContainer.appendChild(recipeCard);
   });
 
   activateFavoriteButtons();
+  activateCartButtons();
+}
+
+function goToDetailView(recipeId) {
+  window.location.href = `detailview.html?id=${recipeId}`;
 }
 
 function activateFavoriteButtons() {
@@ -255,8 +276,22 @@ function activateFavoriteButtons() {
 
   favoriteButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
+      event.stopPropagation();
+
       const recipeId = Number(event.currentTarget.dataset.id);
       toggleFavorite(recipeId);
+    });
+  });
+}
+
+function activateCartButtons() {
+  const cartButtons = document.querySelectorAll(".cart-btn");
+
+  cartButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      console.log("Tilføjet til indkøbskurv");
     });
   });
 }
