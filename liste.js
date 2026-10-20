@@ -8,12 +8,8 @@ const recipeCount = document.querySelector("#recipeCount");
 const filterInfo = document.querySelector("#filterInfo");
 
 const searchInput = document.querySelector("#searchInput");
-const includeIngredientsInput = document.querySelector(
-  "#includeIngredientsInput",
-);
-const excludeIngredientsInput = document.querySelector(
-  "#excludeIngredientsInput",
-);
+const includeIngredientsInput = document.querySelector("#includeIngredientsInput");
+const excludeIngredientsInput = document.querySelector("#excludeIngredientsInput");
 const timeFilter = document.querySelector("#timeFilter");
 const sortFilter = document.querySelector("#sortFilter");
 const favoritesOnly = document.querySelector("#favoritesOnly");
@@ -78,11 +74,7 @@ function matchesSearch(recipe, searchValue) {
   const cuisine = recipe.cuisine.toLowerCase();
   const ingredients = getRecipeIngredientText(recipe);
 
-  return (
-    name.includes(searchValue) ||
-    cuisine.includes(searchValue) ||
-    ingredients.includes(searchValue)
-  );
+  return name.includes(searchValue) || cuisine.includes(searchValue) || ingredients.includes(searchValue);
 }
 
 function matchesIncludedIngredients(recipe, includedIngredients) {
@@ -92,9 +84,7 @@ function matchesIncludedIngredients(recipe, includedIngredients) {
 
   const recipeIngredients = getRecipeIngredientText(recipe);
 
-  const matchCount = includedIngredients.filter((ingredient) =>
-    recipeIngredients.includes(ingredient),
-  ).length;
+  const matchCount = includedIngredients.filter((ingredient) => recipeIngredients.includes(ingredient)).length;
 
   let requiredMatches = 2;
 
@@ -116,9 +106,7 @@ function doesNotContainExcludedIngredients(recipe, excludedIngredients) {
 
   const recipeIngredients = getRecipeIngredientText(recipe);
 
-  return excludedIngredients.every(
-    (ingredient) => !recipeIngredients.includes(ingredient),
-  );
+  return excludedIngredients.every((ingredient) => !recipeIngredients.includes(ingredient));
 }
 
 function matchesTime(recipe, selectedTime) {
@@ -165,22 +153,15 @@ function sortRecipes(recipes) {
 
 function filterRecipes() {
   const searchValue = searchInput.value.toLowerCase().trim();
-  const includedIngredients = parseIngredientsInput(
-    includeIngredientsInput.value,
-  );
-  const excludedIngredients = parseIngredientsInput(
-    excludeIngredientsInput.value,
-  );
+
+  const includedIngredients = parseIngredientsInput(includeIngredientsInput.value);
+
+  const excludedIngredients = parseIngredientsInput(excludeIngredientsInput.value);
+
   const selectedTime = timeFilter.value;
 
   let filteredRecipes = allRecipes.filter((recipe) => {
-    return (
-      matchesSearch(recipe, searchValue) &&
-      matchesIncludedIngredients(recipe, includedIngredients) &&
-      doesNotContainExcludedIngredients(recipe, excludedIngredients) &&
-      matchesTime(recipe, selectedTime) &&
-      matchesFavorites(recipe)
-    );
+    return matchesSearch(recipe, searchValue) && matchesIncludedIngredients(recipe, includedIngredients) && doesNotContainExcludedIngredients(recipe, excludedIngredients) && matchesTime(recipe, selectedTime) && matchesFavorites(recipe);
   });
 
   filteredRecipes = sortRecipes(filteredRecipes);
@@ -193,9 +174,7 @@ function updateFilterInfo(includedIngredients, excludedIngredients) {
   const infoParts = [];
 
   if (includedIngredients.length > 0) {
-    infoParts.push(
-      `Matcher ingredienser du har: ${includedIngredients.join(", ")}`,
-    );
+    infoParts.push(`Matcher ingredienser du har: ${includedIngredients.join(", ")}`);
   }
 
   if (excludedIngredients.length > 0) {
