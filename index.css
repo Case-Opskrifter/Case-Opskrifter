@@ -59,7 +59,7 @@ h1,
 .favoritter h2 {
   font-size: clamp(36px, 6vw, 55px);
   text-align: center;
-  margin: 8px 0 55px;
+  margin: 40px 0 55px;
 }
 
 .flerefavoritter {
