@@ -1,97 +1,163 @@
-/* html {
-  interpolate-size: allow-keywords;
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-} */
+/* GENERELT */
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.6;
+  color: #151515;
+
+  /* ternet baggrund */
+  background-color: #f7ebdb;
+  background-image: repeating-linear-gradient(90deg, rgba(207, 98, 59, 0.3) 0 2px, transparent 2px 60px), repeating-linear-gradient(0deg, rgba(207, 98, 59, 0.3) 0 2px, transparent 2px 60px), repeating-linear-gradient(90deg, rgba(207, 98, 59, 0.12) 0 22px, transparent 22px 60px), repeating-linear-gradient(0deg, rgba(207, 98, 59, 0.12) 0 22px, transparent 22px 60px);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+/* LAYOUT-CONTAINER */
+
+.product_view {
+  width: min(1000px, 92%);
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+/* TITEL */
 
 h1 {
-  padding: 5rem;
-  text-align: center;
-  font-size: 7rem;
-  padding-inline: 2rem;
-  font-size: clamp(48px, 7vw, 54px);
+  margin: 0;
+  padding: 3rem 0 2rem 12%;
+  text-align: left;
+  text-transform: uppercase;
+  font-family: "Permanent Marker", cursive;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  line-height: 1.1;
+  color: #cf623b;
+  letter-spacing: 1px;
 }
 
-/* Billede og hurtig infor */
+h2 {
+  margin-bottom: 1rem;
+  font-family: "Permanent Marker", cursive;
+  font-variant: small-caps;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  line-height: 1;
+  color: #cf623b;
+}
+
+/* INTRO-KORT */
+
 .intro {
-  background-color: var(--baggrund-bokse);
-  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem 2rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+  padding: 1.8rem 2rem;
+  background-color: #fff;
+  border: 1px solid #151515;
+  border-radius: 36px;
+}
+
+.intro_billede {
   width: 100%;
-  margin-inline: auto;
-  padding: 2rem;
-}
-.intro img {
-  border: 1px solid black;
-}
-
-.intro_række {
-  display: flex;
-  gap: 15px; /* Afstand mellem de forskellige informationer */
-  justify-content: center;
-  padding-top: 1rem;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #151515;
+  border-radius: 28px;
 }
 
-/* Beskrivelse af retten */
-.Beskrivelse {
-  background-color: var(--baggrund-bokse);
-}
-/* Ingradienser og fremgangsmåde */
-.ingredienser,
-.fremgangsmaade {
-  padding: 2rem;
-  background-color: var(--baggrund-bokse);
-  margin-bottom: 4rem; /* Afstand mellem de to sektioner */
-  margin-top: 4rem; /* Afstand mellem de to sektioner */
-  margin-inline: 2rem;
+/* INGREDIENSER */
+
+.ingredienser {
+  padding-top: 0.5rem;
 }
 
-.ingredienser_tekst,
-.fremgangsmaade_tekst {
-  border: solid 2px black; /* Den sorte ramme */
-  padding: 2rem;
-  line-height: 2.5rem;
-  background-color: var(--baggrund-bokse);
-}
-/* Checkbox-liste til ingredienser */
 .ingrediensliste {
   list-style: none;
-  gap: 10px;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
 }
 
 .ingrediensliste li {
-  margin-bottom: 0.7rem;
-  padding-right: 2rem;
+  margin-bottom: 0.55rem;
 }
-.grid_1-2 h2 {
+
+.ingrediensliste label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.ingrediensliste input {
+  margin: 0;
+  accent-color: #cf623b;
+}
+
+/* FAKTALINJE */
+
+.intro_række {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem 1.5rem;
+}
+
+.intro_række p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+/* FREMGANGSMÅDE */
+
+.fremgangsmaade {
+  width: 72%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 1.5rem 2rem 2rem 3rem;
+  background-color: #fff;
+}
+
+.fremgangsmaade ol {
+  margin: 0;
+  padding-left: 1.4rem;
+}
+
+.fremgangsmaade li {
   margin-bottom: 1rem;
-  font-family: "Permanent Marker", cursive;
 }
-/* Desktop version */
-@media (min-width: 768px) {
-  .grid_1-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-inline: 16rem;
-    margin-bottom: 3rem;
-    font-size: 1.3rem;
+
+/* MOBIL */
+
+@media (max-width: 600px) {
+  h1 {
+    padding-left: 0;
   }
 
-  .intro img {
-    margin-inline: auto;
-    width: 60%;
-  }
   .intro {
-    padding-block: 3rem;
-    width: 66%;
+    padding: 1.2rem;
+    gap: 1rem;
+    border-radius: 28px;
   }
-  .intro p {
-    display: grid;
-    grid-template-rows: 1fr;
-    font-size: 1.3rem;
+
+  .fremgangsmaade {
+    width: 100%;
+    padding: 1.2rem 1.2rem 1.5rem;
   }
-  .Beskrivelse {
-    margin-inline: 2rem;
+
+  .intro_række p {
+    font-size: 0.85rem;
   }
 }

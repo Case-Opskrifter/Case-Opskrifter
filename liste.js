@@ -1,215 +1,44 @@
 const API_URL = "https://dummyjson.com/recipes?limit=50";
 
-let allRecipes = [];
-let favoriteIds = JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
+let recipes = [];
+let favorites = JSON.parse(localStorage.getItem("favoriteRecipes")) || [];
 
 const recipesContainer = document.querySelector("#recipesContainer");
 const recipeCount = document.querySelector("#recipeCount");
 const filterInfo = document.querySelector("#filterInfo");
 
 const searchInput = document.querySelector("#searchInput");
-const includeIngredientsInput = document.querySelector(
-  "#includeIngredientsInput",
-);
-const excludeIngredientsInput = document.querySelector(
-  "#excludeIngredientsInput",
-);
+const includeInput = document.querySelector("#includeIngredientsInput");
+const excludeInput = document.querySelector("#excludeIngredientsInput");
 const timeFilter = document.querySelector("#timeFilter");
 const sortFilter = document.querySelector("#sortFilter");
 const favoritesOnly = document.querySelector("#favoritesOnly");
-const resetFilters = document.querySelector("#resetFilters");
+const resetBtn = document.querySelector("#resetFilters");
 
-const filterMenuBtn = document.querySelector("#filterMenuBtn");
+const filterBtn = document.querySelector("#filterMenuBtn");
 const filterSection = document.querySelector("#filterSection");
 
-async function fetchRecipes() {
+async function getRecipes() {
+  recipesContainer.innerHTML = `<div class="loading-state">Indlæser opskrifter...</div>`;
+
   try {
-    recipesContainer.innerHTML = `
-      <div class="loading-state">
-        Indlæser opskrifter...
-      </div>
-    `;
-
     const response = await fetch(API_URL);
-
-    if (!response.ok) {
-      throw new Error("API'et svarede ikke korrekt.");
-    }
-
     const data = await response.json();
 
-    allRecipes = data.recipes;
-
-    renderRecipes(allRecipes);
+    recipes = data.recipes;
+    showRecipes(recipes);
   } catch (error) {
-    recipesContainer.innerHTML = `
-      <div class="error-state">
-        Kunne ikke hente opskrifter. Prøv igen senere.
-      </div>
-    `;
-
+    recipesContainer.innerHTML = `<div class="error-state">Kunne ikke hente opskrifter.</div>`;
     recipeCount.textContent = "0 opskrifter";
-    console.error(error);
+    console.log(error);
   }
 }
 
-function parseIngredientsInput(value) {
-  return value
-    .toLowerCase()
-    .split(",")
-    .map((ingredient) => ingredient.trim())
-    .filter((ingredient) => ingredient.length > 0);
-}
-
-function getRecipeIngredientText(recipe) {
-  return recipe.ingredients.join(" ").toLowerCase();
-}
-
-function getTotalTime(recipe) {
-  return recipe.prepTimeMinutes + recipe.cookTimeMinutes;
-}
-
-function matchesSearch(recipe, searchValue) {
-  if (searchValue === "") {
-    return true;
-  }
-
-  const name = recipe.name.toLowerCase();
-  const cuisine = recipe.cuisine.toLowerCase();
-  const ingredients = getRecipeIngredientText(recipe);
-
-  return (
-    name.includes(searchValue) ||
-    cuisine.includes(searchValue) ||
-    ingredients.includes(searchValue)
-  );
-}
-
-function matchesIncludedIngredients(recipe, includedIngredients) {
-  if (includedIngredients.length === 0) {
-    return true;
-  }
-
-  const recipeIngredients = getRecipeIngredientText(recipe);
-
-  const matchCount = includedIngredients.filter((ingredient) =>
-    recipeIngredients.includes(ingredient),
-  ).length;
-
-  let requiredMatches = 2;
-
-  if (includedIngredients.length === 1) {
-    requiredMatches = 1;
-  }
-
-  if (includedIngredients.length === 2) {
-    requiredMatches = 2;
-  }
-
-  return matchCount >= requiredMatches;
-}
-
-function doesNotContainExcludedIngredients(recipe, excludedIngredients) {
-  if (excludedIngredients.length === 0) {
-    return true;
-  }
-
-  const recipeIngredients = getRecipeIngredientText(recipe);
-
-  return excludedIngredients.every(
-    (ingredient) => !recipeIngredients.includes(ingredient),
-  );
-}
-
-function matchesTime(recipe, selectedTime) {
-  if (selectedTime === "all") {
-    return true;
-  }
-
-  const maxTime = Number(selectedTime);
-  const totalTime = getTotalTime(recipe);
-
-  return totalTime <= maxTime;
-}
-
-function matchesFavorites(recipe) {
-  if (!favoritesOnly.checked) {
-    return true;
-  }
-
-  return favoriteIds.includes(recipe.id);
-}
-
-function sortRecipes(recipes) {
-  const selectedSort = sortFilter.value;
-  const sortedRecipes = [...recipes];
-
-  if (selectedSort === "time-asc") {
-    sortedRecipes.sort((a, b) => getTotalTime(a) - getTotalTime(b));
-  }
-
-  if (selectedSort === "time-desc") {
-    sortedRecipes.sort((a, b) => getTotalTime(b) - getTotalTime(a));
-  }
-
-  if (selectedSort === "name-asc") {
-    sortedRecipes.sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  if (selectedSort === "name-desc") {
-    sortedRecipes.sort((a, b) => b.name.localeCompare(a.name));
-  }
-
-  return sortedRecipes;
-}
-
-function filterRecipes() {
-  const searchValue = searchInput.value.toLowerCase().trim();
-  const includedIngredients = parseIngredientsInput(
-    includeIngredientsInput.value,
-  );
-  const excludedIngredients = parseIngredientsInput(
-    excludeIngredientsInput.value,
-  );
-  const selectedTime = timeFilter.value;
-
-  let filteredRecipes = allRecipes.filter((recipe) => {
-    return (
-      matchesSearch(recipe, searchValue) &&
-      matchesIncludedIngredients(recipe, includedIngredients) &&
-      doesNotContainExcludedIngredients(recipe, excludedIngredients) &&
-      matchesTime(recipe, selectedTime) &&
-      matchesFavorites(recipe)
-    );
-  });
-
-  filteredRecipes = sortRecipes(filteredRecipes);
-
-  updateFilterInfo(includedIngredients, excludedIngredients);
-  renderRecipes(filteredRecipes);
-}
-
-function updateFilterInfo(includedIngredients, excludedIngredients) {
-  const infoParts = [];
-
-  if (includedIngredients.length > 0) {
-    infoParts.push(
-      `Matcher ingredienser du har: ${includedIngredients.join(", ")}`,
-    );
-  }
-
-  if (excludedIngredients.length > 0) {
-    infoParts.push(`Udelukker ingredienser: ${excludedIngredients.join(", ")}`);
-  }
-
-  filterInfo.textContent = infoParts.join(" · ");
-}
-
-function renderRecipes(recipes) {
+function showRecipes(list) {
   recipesContainer.innerHTML = "";
-  recipeCount.textContent = `${recipes.length} opskrifter`;
+  recipeCount.textContent = `${list.length} opskrifter`;
 
-  if (recipes.length === 0) {
+  if (list.length === 0) {
     recipesContainer.innerHTML = `
       <div class="empty-state">
         Ingen opskrifter matcher dine filtre.
@@ -218,35 +47,19 @@ function renderRecipes(recipes) {
     return;
   }
 
-  recipes.forEach((recipe) => {
-    const totalTime = getTotalTime(recipe);
-    const isFavorite = favoriteIds.includes(recipe.id);
-    const difficulty = translateDifficulty(recipe.difficulty);
-    const ingredientsPreview = recipe.ingredients.slice(0, 4).join(", ");
+  list.forEach((recipe) => {
+    const totalTime = recipe.prepTimeMinutes + recipe.cookTimeMinutes;
+    const ingredients = recipe.ingredients.slice(0, 4).join(", ");
+    const isFavorite = favorites.includes(recipe.id);
 
-    const recipeCard = document.createElement("article");
-    recipeCard.classList.add("recipe-card");
+    const card = document.createElement("article");
+    card.className = "recipe-card";
 
-    recipeCard.dataset.id = recipe.id;
-    recipeCard.tabIndex = 0;
-    recipeCard.setAttribute("role", "link");
-    recipeCard.setAttribute("aria-label", `Se opskrift: ${recipe.name}`);
-
-    recipeCard.innerHTML = `
+    card.innerHTML = `
       <div class="image-wrapper">
-        <img
-          class="recipe-image"
-          src="${recipe.image}"
-          alt="${recipe.name}"
-        />
+        <img class="recipe-image" src="${recipe.image}" alt="${recipe.name}">
 
-        <button
-          class="favorite-btn ${isFavorite ? "active" : ""}"
-          data-id="${recipe.id}"
-          aria-label="Like ${recipe.name}"
-          title="Tilføj til favoritter"
-          type="button"
-        >
+        <button class="favorite-btn ${isFavorite ? "active" : ""}" data-id="${recipe.id}" type="button">
           ${isFavorite ? "♥" : "♡"}
         </button>
       </div>
@@ -256,127 +69,169 @@ function renderRecipes(recipes) {
 
         <p class="recipe-meta">
           <span>${recipe.cuisine}</span>
-          <span>${difficulty}</span>
+          <span>${translateDifficulty(recipe.difficulty)}</span>
           <span>${totalTime} min</span>
           <span>${recipe.servings} port.</span>
         </p>
 
         <p class="recipe-ingredients">
-          <strong>Ingredienser:</strong> ${ingredientsPreview}${recipe.ingredients.length > 4 ? "..." : ""}
+          <strong>Ingredienser:</strong>
+          ${ingredients}${recipe.ingredients.length > 4 ? "..." : ""}
         </p>
 
         <div class="card-actions">
-          <button class="cart-btn" type="button">
-            + Indkøbskurv
-          </button>
+          <button class="cart-btn" type="button">+ Indkøbskurv</button>
         </div>
       </div>
     `;
 
-    recipeCard.addEventListener("click", () => {
-      goToDetailView(recipe.id);
+    card.addEventListener("click", () => {
+      location.href = `detailview.html?id=${recipe.id}`;
     });
 
-    recipeCard.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        goToDetailView(recipe.id);
-      }
-    });
-
-    recipesContainer.appendChild(recipeCard);
-  });
-
-  activateFavoriteButtons();
-  activateCartButtons();
-}
-
-function goToDetailView(recipeId) {
-  window.location.href = `detailview.html?id=${recipeId}`;
-}
-
-function activateFavoriteButtons() {
-  const favoriteButtons = document.querySelectorAll(".favorite-btn");
-
-  favoriteButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
+    card.querySelector(".favorite-btn").addEventListener("click", (event) => {
       event.stopPropagation();
-
-      const recipeId = Number(event.currentTarget.dataset.id);
-      toggleFavorite(recipeId);
+      toggleFavorite(recipe.id);
     });
-  });
-}
 
-function activateCartButtons() {
-  const cartButtons = document.querySelectorAll(".cart-btn");
-
-  cartButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
+    card.querySelector(".cart-btn").addEventListener("click", (event) => {
       event.stopPropagation();
-
       console.log("Tilføjet til indkøbskurv");
     });
+
+    recipesContainer.appendChild(card);
   });
 }
 
-function toggleFavorite(recipeId) {
-  if (favoriteIds.includes(recipeId)) {
-    favoriteIds = favoriteIds.filter((id) => id !== recipeId);
-  } else {
-    favoriteIds.push(recipeId);
+function filterRecipes() {
+  const search = searchInput.value.toLowerCase().trim();
+  const includeWords = getWords(includeInput.value);
+  const excludeWords = getWords(excludeInput.value);
+  const selectedTime = timeFilter.value;
+
+  let filtered = recipes.filter((recipe) => {
+    const recipeText = `
+      ${recipe.name}
+      ${recipe.cuisine}
+      ${recipe.ingredients.join(" ")}
+    `.toLowerCase();
+
+    const totalTime = recipe.prepTimeMinutes + recipe.cookTimeMinutes;
+
+    const matchesSearch = search === "" || recipeText.includes(search);
+
+    const hasIngredients = includeWords.length === 0 || includeWords.every((word) => recipeText.includes(word));
+
+    const avoidsIngredients = excludeWords.length === 0 || excludeWords.every((word) => !recipeText.includes(word));
+
+    const matchesTime = selectedTime === "all" || totalTime <= Number(selectedTime);
+
+    const matchesFavorite = !favoritesOnly.checked || favorites.includes(recipe.id);
+
+    return matchesSearch && hasIngredients && avoidsIngredients && matchesTime && matchesFavorite;
+  });
+
+  if (sortFilter.value === "time-asc") {
+    filtered.sort((a, b) => getTime(a) - getTime(b));
   }
 
-  localStorage.setItem("favoriteRecipes", JSON.stringify(favoriteIds));
+  if (sortFilter.value === "time-desc") {
+    filtered.sort((a, b) => getTime(b) - getTime(a));
+  }
+
+  if (sortFilter.value === "name-asc") {
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (sortFilter.value === "name-desc") {
+    filtered.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
+  showFilterText(includeWords, excludeWords);
+  showRecipes(filtered);
+}
+
+function getWords(text) {
+  return text
+    .toLowerCase()
+    .split(",")
+    .map((word) => word.trim())
+    .filter((word) => word !== "");
+}
+
+function getTime(recipe) {
+  return recipe.prepTimeMinutes + recipe.cookTimeMinutes;
+}
+
+function showFilterText(includeWords, excludeWords) {
+  let text = "";
+
+  if (includeWords.length > 0) {
+    text += `Ingredienser: ${includeWords.join(", ")}`;
+  }
+
+  if (excludeWords.length > 0) {
+    if (text !== "") {
+      text += " · ";
+    }
+
+    text += `Uden: ${excludeWords.join(", ")}`;
+  }
+
+  filterInfo.textContent = text;
+}
+
+function toggleFavorite(id) {
+  if (favorites.includes(id)) {
+    favorites = favorites.filter((favoriteId) => favoriteId !== id);
+  } else {
+    favorites.push(id);
+  }
+
+  localStorage.setItem("favoriteRecipes", JSON.stringify(favorites));
   filterRecipes();
 }
 
 function translateDifficulty(difficulty) {
-  const translations = {
-    Easy: "Let",
-    Medium: "Mellem",
-    Hard: "Svær",
-  };
+  if (difficulty === "Easy") return "Let";
+  if (difficulty === "Medium") return "Mellem";
+  if (difficulty === "Hard") return "Svær";
 
-  return translations[difficulty] || difficulty;
+  return difficulty;
 }
 
-function resetAllFilters() {
+function resetFilters() {
   searchInput.value = "";
-  includeIngredientsInput.value = "";
-  excludeIngredientsInput.value = "";
+  includeInput.value = "";
+  excludeInput.value = "";
   timeFilter.value = "all";
   sortFilter.value = "default";
   favoritesOnly.checked = false;
   filterInfo.textContent = "";
 
-  renderRecipes(allRecipes);
+  showRecipes(recipes);
 }
 
-function toggleFilterMenu() {
-  if (!filterMenuBtn || !filterSection) {
-    return;
-  }
-
+function toggleFilters() {
   filterSection.classList.toggle("is-open");
 
   if (filterSection.classList.contains("is-open")) {
-    filterMenuBtn.textContent = "× Luk filtre";
+    filterBtn.textContent = "× Luk filtre";
   } else {
-    filterMenuBtn.textContent = "☰ Filtre";
+    filterBtn.textContent = "☰ Filtre";
   }
 }
 
 searchInput.addEventListener("input", filterRecipes);
-includeIngredientsInput.addEventListener("input", filterRecipes);
-excludeIngredientsInput.addEventListener("input", filterRecipes);
+includeInput.addEventListener("input", filterRecipes);
+excludeInput.addEventListener("input", filterRecipes);
 timeFilter.addEventListener("change", filterRecipes);
 sortFilter.addEventListener("change", filterRecipes);
 favoritesOnly.addEventListener("change", filterRecipes);
-resetFilters.addEventListener("click", resetAllFilters);
+resetBtn.addEventListener("click", resetFilters);
 
-if (filterMenuBtn && filterSection) {
-  filterMenuBtn.addEventListener("click", toggleFilterMenu);
+if (filterBtn && filterSection) {
+  filterBtn.addEventListener("click", toggleFilters);
 }
 
-fetchRecipes();
+getRecipes();
